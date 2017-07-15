@@ -6,7 +6,7 @@ from keras.layers import LSTM
 import keras
 
 
-# TODO: fill out the function below that transforms the input series 
+# (done) fill out the function below that transforms the input series 
 # and window-size into a set of input/output pairs for use with our RNN model
 def window_transform_series(series, window_size):
     # containers for input/output pairs
@@ -27,14 +27,20 @@ def window_transform_series(series, window_size):
 
     return X,y
 
-# TODO: build an RNN to perform regression on our time series input/output data
+# (done) build an RNN to perform regression on our time series input/output data
 def build_part1_RNN(window_size):
-    pass
 
+    model = Sequential()
+    model.add(LSTM(5, input_shape=(window_size, 1)))
+    model.add(Dense(1, activation='tanh'))
 
-### TODO: return the text input with only ascii lowercase and the punctuation given below included.
+    return model
+
+### (done) return the text input with only ascii lowercase and the punctuation given below included.
 def cleaned_text(text):
     punctuation = ['!', ',', '.', ':', ';', '?']
+
+    test = [x for x in punctuation or (x >= 'a' and x <= 'z')]
 
     return text
 
