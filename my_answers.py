@@ -3,6 +3,7 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
+from keras.layers import Activation
 import keras
 from math import floor
 
@@ -41,7 +42,14 @@ def build_part1_RNN(window_size):
 def cleaned_text(text):
     punctuation = ['!', ',', '.', ':', ';', '?']
 
-    test = [x for x in punctuation or (x >= 'a' and x <= 'z')]
+    # get the unique characters in the text
+    unique_chars = sorted(list(set(text)))
+    for unique_char in unique_chars:
+        if unique_char in punctuation:
+            continue
+        if unique_char >= 'a' and unique_char <= 'z':
+            continue
+        text = text.replace(unique_char, ' ')
 
     return text
 
